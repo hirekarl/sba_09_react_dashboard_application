@@ -4,8 +4,10 @@ import TaskForm from "../TaskForm/TaskForm"
 import TaskFilter from "../TaskFilter/TaskFilter"
 import TaskList from "../TaskList/TaskList"
 
+import { mockTasks } from "../../data/mockTasks"
+
 export default function Dashboard() {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>(mockTasks)
 
   function handleTaskDelete(taskID: TaskID): void {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskID))
