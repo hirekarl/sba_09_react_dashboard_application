@@ -2,11 +2,11 @@ import type { Task } from "../types"
 
 export const mockTasks: Task[] = [
   {
-    id: "b8c4b7f3-e885-4d1a-99cc-d8926a0146e7",
+    id: "a1c2d3e4-f5g6-7h8i-9j0k-1l2m3n4o5p6q",
     title: "Approve the Intergalactic Expense Report",
     description: "Avoid the thorns in outdated protocols.",
-    dueDate: "2025-07-23",
-    status: "overdue",
+    dueDate: "2025-07-23", // Was overdue, now completed
+    status: "completed",
     priority: "medium",
   },
   {
@@ -37,8 +37,8 @@ export const mockTasks: Task[] = [
     id: "cf055a79-c86f-4ffd-9226-77527e18237f",
     title: "Defenestrate the Inbox",
     description: "Only C-sharp will awaken the gong.",
-    dueDate: "2025-07-23",
-    status: "overdue",
+    dueDate: "2025-07-23", // Was overdue, now in-progress
+    status: "in-progress",
     priority: "high",
   },
   {
@@ -117,24 +117,24 @@ export const mockTasks: Task[] = [
     id: "7a8f8355-c8fa-48ef-bdbb-461985026d0c",
     title: "Fortify the Snack Cabinet",
     description: "Verify if snacks meet ISO 9001 standards.",
-    dueDate: "2025-07-23",
-    status: "overdue",
+    dueDate: "2025-07-23", // Was overdue, now completed
+    status: "completed",
     priority: "medium",
   },
   {
     id: "4949701c-26eb-402e-958b-d7e6a0e2bfc1",
     title: "Deploy the Glitter Bomb",
     description: "Battle formulas in their native habitat.",
-    dueDate: "2025-07-25",
-    status: "overdue",
+    dueDate: "2025-07-25", // Was overdue, now in-progress
+    status: "in-progress",
     priority: "low",
   },
   {
     id: "ad4b4e1c-9859-4326-b789-b1857761186b",
     title: "Water the Firewall",
     description: "Firewall is looking thirsty again.",
-    dueDate: "2025-07-20",
-    status: "overdue",
+    dueDate: "2025-07-20", // Was overdue, now completed
+    status: "completed",
     priority: "medium",
   },
   {
@@ -165,8 +165,8 @@ export const mockTasks: Task[] = [
     id: "e9d4b756-054c-4814-953b-b1fede58ce87",
     title: "Debug the Sock Drawer",
     description: "Sticky situation. Bring tongs.",
-    dueDate: "2025-07-22",
-    status: "overdue",
+    dueDate: "2025-07-22", // Was overdue, now pending
+    status: "pending",
     priority: "high",
   },
   {
