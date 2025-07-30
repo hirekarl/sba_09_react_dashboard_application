@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function TaskItem() {
+export default function TaskFilter() {
   return (
     <div>
-      <h4>TaskItem</h4>
+      <h3>TaskFilter</h3>
     </div>
   )
 }
