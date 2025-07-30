@@ -3,7 +3,7 @@ export type TaskStatus = "completed" | "in-progress" | "pending" | "overdue"
 export type TaskPriority = "high" | "medium" | "low"
 
 export interface Task {
-  id: string
+  id: TaskID
   title: string
   description: string
   dueDate: string
