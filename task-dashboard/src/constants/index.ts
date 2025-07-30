@@ -3,6 +3,7 @@ import type {
   TaskPriority,
   Filters,
   SortCategory,
+  SortRank,
   SortFunc
 } from "../types"
 
@@ -27,8 +28,6 @@ export const SORT_CATEGORIES: SortCategory[] = [
   "due-date",
   "title",
 ] as const
-
-type SortRank = 1 | 2 | 3
 
 export const STATUS_SORT_RANK: Record<TaskStatus, SortRank> = {
   "pending": 1,
