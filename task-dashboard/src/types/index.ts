@@ -10,6 +10,11 @@ export type Filter =
   | { status: TaskStatusFilter }
   | { priority: TaskPriorityFilter }
 
+export interface Filters {
+  status: TaskStatusFilter
+  priority: TaskPriorityFilter
+}
+
 export type SortCategory = "status" | "priority" | "due-date" | "title"
 
 export interface Task {
@@ -37,11 +42,6 @@ export interface TaskItemProps {
 
 export interface TaskFormProps {
   onTaskAdd: (task: Task) => void
-}
-
-export interface Filters {
-  status: TaskStatusFilter
-  priority: TaskPriorityFilter
 }
 
 export interface TaskFilterProps {
