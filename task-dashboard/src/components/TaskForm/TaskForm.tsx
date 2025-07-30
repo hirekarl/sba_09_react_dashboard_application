@@ -32,8 +32,8 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
   }
 
   return (
-    <div className="border rounded-3 p-3">
-      <h2 className="fs-4">Add a new Task</h2>
+    <div className="border rounded-3 p-3 mb-3">
+      <h2 className="fs-4 text-center">Add Task</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3 row">
           <label

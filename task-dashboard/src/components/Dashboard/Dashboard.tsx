@@ -10,6 +10,7 @@ import type {
 import TaskForm from "../TaskForm/TaskForm"
 import TaskFilter from "../TaskFilter/TaskFilter"
 import TaskList from "../TaskList/TaskList"
+import TaskStatistics from "../TaskStatistics/TaskStatistics"
 import { mockTasks } from "../../data/mockTasks"
 
 export default function Dashboard() {
@@ -67,6 +68,7 @@ export default function Dashboard() {
     <>
       <div className="col-lg-6 offset-lg-0 col-md-10 offset-md-1 col-sm-12">
         <TaskForm onTaskAdd={handleTaskAdd} />
+        <TaskStatistics tasks={tasks} />
       </div>
       <div className="col-lg-6 offset-lg-0 col-md-10 offset-md-1 col-sm-12">
         <TaskFilter

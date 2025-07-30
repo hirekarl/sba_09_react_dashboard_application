@@ -50,3 +50,7 @@ export interface TaskFilterProps {
   onFilterChange: (newFilter: Filter) => void
   onSortCategoryChange: (newSortCategory: SortCategory) => void
 }
+
+export interface TaskStatisticsProps {
+  tasks: Task[]
+}
