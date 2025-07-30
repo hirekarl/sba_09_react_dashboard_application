@@ -1,11 +1,15 @@
 import { useState } from "react"
-import type { Task } from "../../types"
+import type { Task, TaskID } from "../../types"
 import TaskForm from "../TaskForm/TaskForm"
 import TaskFilter from "../TaskFilter/TaskFilter"
 import TaskList from "../TaskList/TaskList"
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>([])
+
+  function handleTaskDelete(taskID: TaskID): void {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskID))
+  }
 
   return (
     <>
@@ -15,7 +19,7 @@ export default function Dashboard() {
       </div>
       <div className="col-6">
         <TaskFilter />
-        <TaskList tasks={tasks} />
+        <TaskList onTaskDelete={handleTaskDelete} tasks={tasks} />
       </div>
     </>
   )
