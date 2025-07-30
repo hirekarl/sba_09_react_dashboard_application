@@ -5,8 +5,9 @@ import { SORT_CATEGORY_TO_SORT_FUNC } from "../../constants"
 export default function TaskList({
   tasks,
   sortCategory,
-  onTaskDelete,
   onTaskStatusChange,
+  onTaskEdit,
+  onTaskDelete,
 }: TaskListProps) {
   const sortFunc: SortFunc = SORT_CATEGORY_TO_SORT_FUNC[sortCategory]
   tasks.sort(sortFunc)
@@ -16,8 +17,9 @@ export default function TaskList({
       <TaskItem
         key={task.id}
         task={task}
-        onDelete={onTaskDelete}
         onStatusChange={onTaskStatusChange}
+        onEdit={onTaskEdit}
+        onDelete={onTaskDelete}
       />
     )
   })

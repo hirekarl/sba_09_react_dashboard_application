@@ -31,15 +31,17 @@ export interface Task {
 export interface TaskListProps {
   tasks: Task[]
   sortCategory: SortCategory
-  onTaskDelete: (taskID: TaskID) => void
   onTaskStatusChange: (taskID: TaskID, newTaskStatus: TaskStatus) => void
+  onTaskEdit: (taskID: TaskID) => void
+  onTaskDelete: (taskID: TaskID) => void
 }
 
 export interface TaskItemProps {
   key: TaskID
   task: Task
-  onDelete: (taskID: TaskID) => void
   onStatusChange: (taskID: TaskID, newTaskStatus: TaskStatus) => void
+  onEdit: (taskID: TaskID) => void
+  onDelete: (taskID: TaskID) => void
 }
 
 export interface TaskFormProps {

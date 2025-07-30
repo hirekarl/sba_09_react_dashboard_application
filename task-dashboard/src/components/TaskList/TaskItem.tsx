@@ -3,14 +3,22 @@ import { TASK_STATUSES } from "../../constants"
 
 export default function TaskItem({
   task,
-  onDelete,
   onStatusChange,
+  onEdit,
+  onDelete,
 }: TaskItemProps) {
   const { id, title, description, dueDate, status, priority }: Task = task
 
   function formatDate(): string {
     const [year, month, day] = dueDate.split("-").map((part) => parseInt(part))
     return `${month}/${day}/${year}`
+  }
+
+  function handleEditButtonClick(
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void {
+    const taskID: TaskID = event.currentTarget.dataset.id as TaskID
+    onEdit(taskID)
   }
 
   function handleDeleteButtonClick(
@@ -60,12 +68,22 @@ export default function TaskItem({
               <option value="completed">Completed</option>
             </select>
           </div>
-          <button
-            className="btn btn-sm btn-danger"
-            data-id={id}
-            onClick={handleDeleteButtonClick}>
-            Delete
-          </button>
+          <div className="btn-group" role="group">
+            <button
+              type="button"
+              className="btn btn-sm btn-warning"
+              data-id={id}
+              onClick={handleEditButtonClick}>
+              Edit
+            </button>
+            <button
+              type="button"
+              className="btn btn-sm btn-danger"
+              data-id={id}
+              onClick={handleDeleteButtonClick}>
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>

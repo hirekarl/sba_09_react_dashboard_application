@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [sortCategory, setSortCategory] =
     useState<SortCategory>(defaultSortCategory)
-  const [modalVisible, setModalVisible] = useState<boolean>(false)
+  // const [modalVisible, setModalVisible] = useState<boolean>(false)
 
   function getTaskByID(taskID: TaskID): Task | null {
     const task = tasks.find((t) => t.id === taskID)
@@ -30,14 +30,12 @@ export default function Dashboard() {
     setTasks((prevTasks) => [...prevTasks, newTask])
   }
 
-  function handleTaskEdit(taskID: TaskID, newTask: Task) {
-    const task = getTaskByID(taskID)
+  function handleTaskEdit(taskID: TaskID): void {
+    // const task = getTaskByID(taskID)
 
-    if (task) {
-      setTasks((prevTasks) =>
-        prevTasks.toSpliced(prevTasks.indexOf(task), 1, newTask)
-      )
-    }
+    alert(`You clicked the Edit button for Task with ID ${taskID}.`)
+
+    /* Do something wtih the modal */
   }
 
   function handleTaskDelete(taskID: TaskID): void {
@@ -99,6 +97,7 @@ export default function Dashboard() {
           )}
           sortCategory={sortCategory}
           onTaskStatusChange={handleTaskStatusChange}
+          onTaskEdit={handleTaskEdit}
           onTaskDelete={handleTaskDelete}
         />
       </div>
