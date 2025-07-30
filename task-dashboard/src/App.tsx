@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="container-fluid">
       <div className="row">
-        <h1>SBA 9: React Dashboard Application</h1>
+        <h1 className="my-4">SBA 9: React Dashboard Application</h1>
         <Dashboard />
       </div>
     </div>

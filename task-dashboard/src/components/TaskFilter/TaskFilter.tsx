@@ -2,11 +2,14 @@ import type {
   TaskFilterProps,
   TaskPriorityFilters,
   TaskStatusFilters,
+  SortCategory
 } from "../../types"
 
 export default function TaskFilter({
   filters,
+  sortCategory,
   onFilterChange,
+  onSortCategoryChange,
 }: TaskFilterProps) {
   const { status, priority } = filters
 
@@ -20,6 +23,12 @@ export default function TaskFilter({
     event: React.ChangeEvent<HTMLSelectElement>
   ): void {
     onFilterChange({ priority: event.target.value as TaskPriorityFilters })
+  }
+
+  function handleSortCategorySelect(
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void {
+    onSortCategoryChange(event.target.value as SortCategory)
   }
 
   return (
@@ -53,6 +62,23 @@ export default function TaskFilter({
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+      <div className="mb-3">
+        <div className="input-group">
+          <label htmlFor="sort-category-select" className="input-group-text">
+            Sort by
+          </label>
+          <select
+            id="sort-category-select"
+            className="form-select"
+            onChange={handleSortCategorySelect}
+            value={sortCategory}>
+            <option value="status">Status</option>
+            <option value="priority">Priority</option>
+            <option value="due-date">Due Date</option>
+            <option value="title">Title</option>
           </select>
         </div>
       </div>

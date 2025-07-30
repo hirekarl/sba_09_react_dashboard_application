@@ -1,8 +1,16 @@
 export type TaskID = string
+
 export type TaskStatus = "completed" | "in-progress" | "pending"
-export type TaskStatusFilters = TaskStatus | "all"
 export type TaskPriority = "high" | "medium" | "low"
+
 export type TaskPriorityFilters = TaskPriority | "all"
+export type TaskStatusFilters = TaskStatus | "all"
+
+export type Filter =
+  | { status: TaskStatusFilters }
+  | { priority: TaskPriorityFilters }
+
+export type SortCategory = "status" | "priority" | "due-date" | "title"
 
 export interface Task {
   id: TaskID
@@ -15,6 +23,7 @@ export interface Task {
 
 export interface TaskListProps {
   tasks: Task[]
+  sortCategory: SortCategory
   onTaskDelete: (taskID: TaskID) => void
   onTaskStatusChange: (taskID: TaskID, newTaskStatus: TaskStatus) => void
 }
@@ -30,10 +39,6 @@ export interface TaskFormProps {
   onTaskAdd: (task: Task) => void
 }
 
-export type Filter =
-  | { status: TaskStatusFilters }
-  | { priority: TaskPriorityFilters }
-
 export interface Filters {
   status: TaskStatusFilters
   priority: TaskPriorityFilters
@@ -41,5 +46,7 @@ export interface Filters {
 
 export interface TaskFilterProps {
   filters: Filters
+  sortCategory: SortCategory
   onFilterChange: (newFilter: Filter) => void
+  onSortCategoryChange: (newSortCategory: SortCategory) => void
 }
