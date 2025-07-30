@@ -1,6 +1,6 @@
 import TaskItem from "./TaskItem"
 import type { Task, TaskListProps } from "../../types"
-import { statusSortRank, prioritySortRank } from "../../constants"
+import { STATUS_SORT_RANK, PRIORITY_SORT_RANK } from "../../constants"
 
 export default function TaskList({
   tasks,
@@ -12,11 +12,11 @@ export default function TaskList({
 
   switch (sortCategory) {
     case "status":
-      sortFunc = (a, b) => statusSortRank[a.status] - statusSortRank[b.status]
+      sortFunc = (a, b) => STATUS_SORT_RANK[a.status] - STATUS_SORT_RANK[b.status]
       break
     case "priority":
       sortFunc = (a, b) =>
-        prioritySortRank[a.priority] - prioritySortRank[b.priority]
+        PRIORITY_SORT_RANK[a.priority] - PRIORITY_SORT_RANK[b.priority]
       break
     case "due-date":
       sortFunc = (a, b) => {
