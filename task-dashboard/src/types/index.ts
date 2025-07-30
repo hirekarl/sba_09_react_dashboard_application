@@ -16,6 +16,7 @@ export interface Filters {
 }
 
 export type SortCategory = "status" | "priority" | "due-date" | "title"
+export type SortFunc = (a: Task, b: Task) => number
 
 export interface Task {
   id: TaskID
