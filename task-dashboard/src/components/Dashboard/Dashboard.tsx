@@ -11,17 +11,17 @@ import TaskForm from "../TaskForm/TaskForm"
 import TaskFilter from "../TaskFilter/TaskFilter"
 import TaskList from "../TaskList/TaskList"
 import TaskStatistics from "../TaskStatistics/TaskStatistics"
+import { defaultFilters, defaultSortCategory } from "../../constants"
 import { mockTasks } from "../../data/mockTasks"
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks)
 
-  const defaultFilters: Filters = { status: "all", priority: "all" }
   const [filters, setFilters] = useState<Filters>(defaultFilters)
-
-  const defaultSortCategory: SortCategory = "status"
   const [sortCategory, setSortCategory] =
     useState<SortCategory>(defaultSortCategory)
+  
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
 
   function handleTaskAdd(task: Task) {
     setTasks((prevTasks) => [...prevTasks, task])

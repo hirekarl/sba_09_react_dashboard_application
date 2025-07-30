@@ -1,4 +1,7 @@
-import type { TaskStatus, TaskPriority, SortCategory } from "../types"
+import type { TaskStatus, TaskPriority, Filters, SortCategory } from "../types"
+
+export const defaultFilters: Filters = { status: "all", priority: "all" }
+export const defaultSortCategory: SortCategory = "status"
 
 export const TASK_STATUSES: TaskStatus[] = [
   "completed",
