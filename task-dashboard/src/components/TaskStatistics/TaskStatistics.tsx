@@ -1,32 +1,26 @@
 import type { TaskStatisticsProps } from "../../types"
+import { TASK_STATUSES, TASK_PRIORITIES } from "../../constants"
 
 export default function TaskStatistics({ tasks }: TaskStatisticsProps) {
   const totalTasksCount = tasks.length
 
-  const completedTasksCount = tasks.reduce(
-    (acc, t) => (t.status === "completed" ? (acc += 1) : (acc += 0)),
-    0
-  )
-  const inProgressTasksCount = tasks.reduce(
-    (acc, t) => (t.status === "in-progress" ? (acc += 1) : (acc += 0)),
-    0
-  )
-  const pendingTasksCount = tasks.reduce(
-    (acc, t) => (t.status === "pending" ? (acc += 1) : (acc += 0)),
-    0
-  )
+  const [completedTasksCount, inProgressTasksCount, pendingTasksCount] =
+    TASK_STATUSES.map((status) =>
+      tasks.reduce(
+        (acc, t) => (t.status === status ? (acc += 1) : acc),
+        0
+      )
+    )
 
-  const highPriorityTasksCount = tasks.reduce(
-    (acc, t) => (t.priority === "high" ? (acc += 1) : (acc += 0)),
-    0
-  )
-  const mediumPriorityTasksCount = tasks.reduce(
-    (acc, t) => (t.priority === "medium" ? (acc += 1) : (acc += 0)),
-    0
-  )
-  const lowPriorityTasksCount = tasks.reduce(
-    (acc, t) => (t.priority === "low" ? (acc += 1) : (acc += 0)),
-    0
+  const [
+    highPriorityTasksCount,
+    mediumPriorityTasksCount,
+    lowPriorityTasksCount,
+  ] = TASK_PRIORITIES.map((priority) =>
+    tasks.reduce(
+      (acc, t) => (t.priority === priority ? (acc += 1) : acc),
+      0
+    )
   )
 
   return (
