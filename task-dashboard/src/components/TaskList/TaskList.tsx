@@ -1,14 +1,24 @@
 import TaskItem from "./TaskItem"
 import type { TaskListProps } from "../../types"
 
-export default function TaskList({ tasks, onTaskDelete }: TaskListProps) {
+export default function TaskList({
+  tasks,
+  onTaskDelete,
+  onTaskStatusChange,
+}: TaskListProps) {
   const tasksToRender = tasks.map((task) => {
-    return <TaskItem key={task.id} task={task} onDelete={onTaskDelete} />
+    return (
+      <TaskItem
+        key={task.id}
+        task={task}
+        onDelete={onTaskDelete}
+        onStatusChange={onTaskStatusChange}
+      />
+    )
   })
 
   return (
     <>
-      <h3>TaskList</h3>
       {tasksToRender}
     </>
   )

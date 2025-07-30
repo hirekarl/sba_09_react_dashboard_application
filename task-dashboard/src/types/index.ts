@@ -1,5 +1,5 @@
 export type TaskID = string
-export type TaskStatus = "completed" | "in-progress" | "pending" | "overdue"
+export type TaskStatus = "completed" | "in-progress" | "pending"
 export type TaskPriority = "high" | "medium" | "low"
 
 export interface Task {
@@ -14,10 +14,16 @@ export interface Task {
 export interface TaskListProps {
   tasks: Task[]
   onTaskDelete: (taskID: TaskID) => void
+  onTaskStatusChange: (taskID: TaskID, newTaskStatus: TaskStatus) => void
 }
 
 export interface TaskItemProps {
   key: TaskID
   task: Task
   onDelete: (taskID: TaskID) => void
+  onStatusChange: (taskID: TaskID, newTaskStatus: TaskStatus) => void
+}
+
+export interface TaskFormProps {
+  onTaskAdd: (task: Task) => void
 }

@@ -1,28 +1,73 @@
-import type { Task, TaskID, TaskItemProps } from "../../types"
+import type { Task, TaskID, TaskStatus, TaskItemProps } from "../../types"
+import { TASK_STATUSES } from "../../constants"
 
-export default function TaskItem({ task, onDelete }: TaskItemProps) {
+export default function TaskItem({
+  task,
+  onDelete,
+  onStatusChange,
+}: TaskItemProps) {
   const { id, title, description, dueDate, status, priority }: Task = task
 
-  function handleClick(event: React.MouseEvent<HTMLButtonElement>): void {
+  function formatDate(): string {
+    const [year, month, day] = dueDate.split("-").map((part) => parseInt(part))
+    return `${month}/${day}/${year}`
+  }
+
+  function handleDeleteButtonClick(
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void {
     const taskID: TaskID = event.currentTarget.dataset.id as TaskID
     onDelete(taskID)
   }
 
+  function handleStatusChange(
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void {
+    if (TASK_STATUSES.includes(event.target.value as TaskStatus)) {
+      const newTaskStatus = event.target.value as TaskStatus
+      onStatusChange(id, newTaskStatus)
+    }
+  }
+
   return (
-    <div>
-      <h4>TaskItem</h4>
-      <h5>Props</h5>
-      <ul>
-        <li>ID: {id}</li>
-        <li>Title: {title}</li>
-        <li>Description: {description}</li>
-        <li>Due Date: {dueDate}</li>
-        <li>Status: {status}</li>
-        <li>Priority: {priority}</li>
-      </ul>
-      <button className="btn btn-danger" data-id={id} onClick={handleClick}>
-        Delete
-      </button>
+    <div className="card mb-3">
+      <div className="card-body">
+        <div className="card-title">
+          <h3 className="fs-5">{title}</h3>
+        </div>
+        <p className="card-text">{description}</p>
+        <p className="card-text">
+          <strong>Priority:</strong> {priority}
+        </p>
+        <p className="card-text">
+          <strong>Due:</strong> {formatDate()}
+        </p>
+      </div>
+      <div className="card-footer">
+        <div className="d-flex justify-content-between gap-3">
+          <div className="input-group w-50">
+            <label htmlFor={`status-select-${id}`} className="input-group-text">
+              Status
+            </label>
+            <select
+              id={`status-select-${id}`}
+              data-id={id}
+              onChange={handleStatusChange}
+              value={status}
+              className="form-select">
+              <option value="pending">Pending</option>
+              <option value="in-progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+          <button
+            className="btn btn-sm btn-danger"
+            data-id={id}
+            onClick={handleDeleteButtonClick}>
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
