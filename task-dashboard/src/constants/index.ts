@@ -22,15 +22,15 @@ export const SORT_CATEGORIES: SortCategory[] = [
   "title",
 ] as const
 
-type sortRank = 1 | 2 | 3
+type SortRank = 1 | 2 | 3
 
-export const statusSortRank: Record<TaskStatus, sortRank> = {
+export const statusSortRank: Record<TaskStatus, SortRank> = {
   "pending": 1,
   "in-progress": 2,
   "completed": 3,
 } as const
 
-export const prioritySortRank: Record<TaskPriority, sortRank> = {
+export const prioritySortRank: Record<TaskPriority, SortRank> = {
   high: 1,
   medium: 2,
   low: 3,
