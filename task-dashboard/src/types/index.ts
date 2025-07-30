@@ -3,12 +3,12 @@ export type TaskID = string
 export type TaskStatus = "completed" | "in-progress" | "pending"
 export type TaskPriority = "high" | "medium" | "low"
 
-export type TaskPriorityFilters = TaskPriority | "all"
-export type TaskStatusFilters = TaskStatus | "all"
+export type TaskPriorityFilter = TaskPriority | "all"
+export type TaskStatusFilter = TaskStatus | "all"
 
 export type Filter =
-  | { status: TaskStatusFilters }
-  | { priority: TaskPriorityFilters }
+  | { status: TaskStatusFilter }
+  | { priority: TaskPriorityFilter }
 
 export type SortCategory = "status" | "priority" | "due-date" | "title"
 
@@ -40,8 +40,8 @@ export interface TaskFormProps {
 }
 
 export interface Filters {
-  status: TaskStatusFilters
-  priority: TaskPriorityFilters
+  status: TaskStatusFilter
+  priority: TaskPriorityFilter
 }
 
 export interface TaskFilterProps {

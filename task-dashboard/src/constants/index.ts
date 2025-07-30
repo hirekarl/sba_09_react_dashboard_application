@@ -19,16 +19,18 @@ export const SORT_CATEGORIES: SortCategory[] = [
   "status",
   "priority",
   "due-date",
-  "title"
+  "title",
 ] as const
 
-export const statusSortRank: Record<TaskStatus, number> = {
+type sortRank = 1 | 2 | 3
+
+export const statusSortRank: Record<TaskStatus, sortRank> = {
   "pending": 1,
   "in-progress": 2,
   "completed": 3,
 } as const
 
-export const prioritySortRank: Record<TaskPriority, number> = {
+export const prioritySortRank: Record<TaskPriority, sortRank> = {
   high: 1,
   medium: 2,
   low: 3,

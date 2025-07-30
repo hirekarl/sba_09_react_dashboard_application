@@ -1,7 +1,7 @@
 import type {
   TaskFilterProps,
-  TaskPriorityFilters,
-  TaskStatusFilters,
+  TaskPriorityFilter,
+  TaskStatusFilter,
   SortCategory
 } from "../../types"
 
@@ -16,13 +16,13 @@ export default function TaskFilter({
   function handleStatusFilterSelect(
     event: React.ChangeEvent<HTMLSelectElement>
   ): void {
-    onFilterChange({ status: event.target.value as TaskStatusFilters })
+    onFilterChange({ status: event.target.value as TaskStatusFilter })
   }
 
   function handlePriorityFilterSelect(
     event: React.ChangeEvent<HTMLSelectElement>
   ): void {
-    onFilterChange({ priority: event.target.value as TaskPriorityFilters })
+    onFilterChange({ priority: event.target.value as TaskPriorityFilter })
   }
 
   function handleSortCategorySelect(
