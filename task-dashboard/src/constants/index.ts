@@ -4,11 +4,21 @@ import type {
   Filters,
   SortCategory,
   SortRank,
-  SortFunc
+  SortFunc,
+  Task,
 } from "../types"
 
 export const defaultFilters: Filters = { status: "all", priority: "all" }
 export const defaultSortCategory: SortCategory = "status"
+
+export const blankFormData: Task = {
+  id: "",
+  title: "",
+  description: "",
+  dueDate: "",
+  status: "pending",
+  priority: "low",
+}
 
 export const TASK_STATUSES: TaskStatus[] = [
   "completed",

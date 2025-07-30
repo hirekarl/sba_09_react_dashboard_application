@@ -16,15 +16,28 @@ import { mockTasks } from "../../data/mockTasks"
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks)
-
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [sortCategory, setSortCategory] =
     useState<SortCategory>(defaultSortCategory)
-  
   const [modalVisible, setModalVisible] = useState<boolean>(false)
 
-  function handleTaskAdd(task: Task) {
-    setTasks((prevTasks) => [...prevTasks, task])
+  function getTaskByID(taskID: TaskID): Task | null {
+    const task = tasks.find((t) => t.id === taskID)
+    return task ? task : null
+  }
+
+  function handleTaskAdd(newTask: Task) {
+    setTasks((prevTasks) => [...prevTasks, newTask])
+  }
+
+  function handleTaskEdit(taskID: TaskID, newTask: Task) {
+    const task = getTaskByID(taskID)
+
+    if (task) {
+      setTasks((prevTasks) =>
+        prevTasks.toSpliced(prevTasks.indexOf(task), 1, newTask)
+      )
+    }
   }
 
   function handleTaskDelete(taskID: TaskID): void {
@@ -35,7 +48,7 @@ export default function Dashboard() {
     taskID: TaskID,
     newTaskStatus: TaskStatus
   ): void {
-    const task = tasks.find((t) => t.id === taskID)
+    const task = getTaskByID(taskID)
 
     if (task)
       setTasks((prevTasks) =>
@@ -82,7 +95,7 @@ export default function Dashboard() {
           tasks={tasks.filter(
             (t) =>
               (filters.status === "all" || t.status === filters.status) &&
-            (filters.priority === "all" || t.priority === filters.priority)
+              (filters.priority === "all" || t.priority === filters.priority)
           )}
           sortCategory={sortCategory}
           onTaskStatusChange={handleTaskStatusChange}

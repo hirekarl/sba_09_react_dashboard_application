@@ -1,16 +1,8 @@
 import { useState } from "react"
 import type { Task, TaskFormProps } from "../../types"
+import { blankFormData } from "../../constants"
 
 export default function TaskForm({ onTaskAdd }: TaskFormProps) {
-  const uuid: string = window.crypto.randomUUID()
-  const blankFormData: Task = {
-    id: uuid,
-    title: "",
-    description: "",
-    dueDate: "",
-    status: "pending",
-    priority: "low",
-  }
   const [formData, setFormData] = useState<Task>(blankFormData)
 
   function handleChange(
@@ -20,6 +12,7 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
 
     setFormData((prevFormData) => ({
       ...prevFormData,
+      id: window.crypto.randomUUID(),
       [name]: value,
     }))
   }
