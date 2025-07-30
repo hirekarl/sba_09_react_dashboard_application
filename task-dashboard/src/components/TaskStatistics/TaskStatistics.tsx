@@ -1,4 +1,4 @@
-import { TaskStatisticsProps } from "../../types"
+import type { TaskStatisticsProps } from "../../types"
 
 export default function TaskStatistics({ tasks }: TaskStatisticsProps) {
   const totalTasksCount = tasks.length
@@ -41,9 +41,9 @@ export default function TaskStatistics({ tasks }: TaskStatisticsProps) {
             </div>
             <div className="card-text">
               <ul>
-                <li>Completed: {completedTasksCount}</li>
-                <li>In Progress: {inProgressTasksCount}</li>
                 <li>Pending: {pendingTasksCount}</li>
+                <li>In Progress: {inProgressTasksCount}</li>
+                <li>Completed: {completedTasksCount}</li>
               </ul>
             </div>
           </div>

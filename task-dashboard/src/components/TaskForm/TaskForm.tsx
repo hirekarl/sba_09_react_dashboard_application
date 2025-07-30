@@ -122,7 +122,7 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
             </select>
           </div>
         </div>
-        <div className="mb-3">
+        <div>
           <button type="submit" className="btn btn-primary w-100">
             Submit
           </button>
