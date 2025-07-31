@@ -8,9 +8,12 @@ import type {
   Task,
 } from "../types"
 
-export const defaultFilters: Filters = { status: "all", priority: "all" }
-export const defaultSortCategory: SortCategory = "status"
+export const defaultFilters: Filters = {
+  status: "all",
+  priority: "all",
+} as const
 
+export const defaultSortCategory: SortCategory = "status"
 
 export const blankFormData: Task = {
   id: "",
@@ -23,9 +26,8 @@ export const blankFormData: Task = {
 
 export const defaultModalState = {
   taskToEdit: blankFormData,
-  modalVisible: false
-}
-
+  modalVisible: false,
+} as const
 
 export const TASK_STATUSES: TaskStatus[] = [
   "completed",
@@ -68,4 +70,4 @@ export const SORT_CATEGORY_TO_SORT_FUNC: Record<SortCategory, SortFunc> = {
     return dateA.getTime() - dateB.getTime()
   },
   "title": (a, b) => a.title.localeCompare(b.title),
-}
+} as const
