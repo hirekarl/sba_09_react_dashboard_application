@@ -1,17 +1,22 @@
 import { useState } from "react"
-import type {
-  Task,
-  TaskID,
-  TaskStatus,
-  Filter,
-  Filters,
-  SortCategory,
+import {
+  type Task,
+  type TaskID,
+  type TaskStatus,
+  type Filter,
+  type Filters,
+  type SortCategory,
 } from "../../types"
 import TaskForm from "../TaskForm/TaskForm"
 import TaskFilter from "../TaskFilter/TaskFilter"
 import TaskList from "../TaskList/TaskList"
 import TaskStatistics from "../TaskStatistics/TaskStatistics"
-import { defaultFilters, defaultSortCategory } from "../../constants"
+import TaskEditModal from "../TaskEditModal/TaskEditModal"
+import {
+  blankFormData,
+  defaultFilters,
+  defaultSortCategory,
+} from "../../constants"
 import { mockTasks } from "../../data/mockTasks"
 
 export default function Dashboard() {
@@ -19,7 +24,8 @@ export default function Dashboard() {
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [sortCategory, setSortCategory] =
     useState<SortCategory>(defaultSortCategory)
-  // const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [taskToEdit, setTaskToEdit] = useState<Task>(blankFormData)
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
 
   function getTaskByID(taskID: TaskID): Task | null {
     const task = tasks.find((t) => t.id === taskID)
@@ -31,11 +37,21 @@ export default function Dashboard() {
   }
 
   function handleTaskEdit(taskID: TaskID): void {
-    // const task = getTaskByID(taskID)
+    const task = getTaskByID(taskID)
+    if (task) {
+      setTaskToEdit(task)
+      setModalVisible(true)
+    }
+  }
 
-    alert(`You clicked the Edit button for Task with ID ${taskID}.`)
+  function handleModalSave(newTask: Task): void {
+    setTasks((prevTasks) =>
+      prevTasks.toSpliced(prevTasks.indexOf(taskToEdit), 1, newTask)
+    )
+  }
 
-    /* Do something wtih the modal */
+  function handleModalClose(): void {
+    setModalVisible(false)
   }
 
   function handleTaskDelete(taskID: TaskID): void {
@@ -101,6 +117,12 @@ export default function Dashboard() {
           onTaskDelete={handleTaskDelete}
         />
       </div>
+      <TaskEditModal
+        taskToEdit={taskToEdit}
+        modalVisible={modalVisible}
+        onModalClose={handleModalClose}
+        onModalSave={handleModalSave}
+      />
     </>
   )
 }

@@ -58,3 +58,10 @@ export interface TaskFilterProps {
 export interface TaskStatisticsProps {
   tasks: Task[]
 }
+
+export interface TaskEditModalProps {
+  taskToEdit: Task
+  modalVisible: boolean
+  onModalClose: () => void
+  onModalSave: (newTask: Task) => void
+}
