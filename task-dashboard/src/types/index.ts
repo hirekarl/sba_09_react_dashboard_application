@@ -59,9 +59,13 @@ export interface TaskStatisticsProps {
   tasks: Task[]
 }
 
-export interface TaskEditModalProps {
+export interface ModalState {
   taskToEdit: Task
   modalVisible: boolean
+}
+
+export interface TaskEditModalProps {
+  modalState: ModalState
   onModalClose: () => void
   onModalSave: (newTask: Task) => void
 }

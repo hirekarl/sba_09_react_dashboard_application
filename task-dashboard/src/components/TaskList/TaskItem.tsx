@@ -1,4 +1,4 @@
-import type { Task, TaskID, TaskStatus, TaskItemProps } from "../../types"
+import type { Task, TaskStatus, TaskItemProps } from "../../types"
 import { TASK_STATUSES } from "../../constants"
 
 export default function TaskItem({
@@ -14,18 +14,12 @@ export default function TaskItem({
     return `${month}/${day}/${year}`
   }
 
-  function handleEditButtonClick(
-    event: React.MouseEvent<HTMLButtonElement>
-  ): void {
-    const taskID: TaskID = event.currentTarget.dataset.id as TaskID
-    onEdit(taskID)
+  function handleEditButtonClick(): void {
+    onEdit(id)
   }
 
-  function handleDeleteButtonClick(
-    event: React.MouseEvent<HTMLButtonElement>
-  ): void {
-    const taskID: TaskID = event.currentTarget.dataset.id as TaskID
-    onDelete(taskID)
+  function handleDeleteButtonClick(): void {
+    onDelete(id)
   }
 
   function handleStatusChange(

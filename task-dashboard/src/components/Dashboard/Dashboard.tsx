@@ -6,6 +6,7 @@ import {
   type Filter,
   type Filters,
   type SortCategory,
+  type ModalState,
 } from "../../types"
 import TaskForm from "../TaskForm/TaskForm"
 import TaskFilter from "../TaskFilter/TaskFilter"
@@ -18,14 +19,20 @@ import {
   defaultSortCategory,
 } from "../../constants"
 import { mockTasks } from "../../data/mockTasks"
+import { getTasksFromLocalStorage } from "../../utils/taskUtils"
 
 export default function Dashboard() {
-  const [tasks, setTasks] = useState<Task[]>(mockTasks)
+  const [tasks, setTasks] = useState<Task[]>(
+    getTasksFromLocalStorage() || mockTasks
+  )
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [sortCategory, setSortCategory] =
     useState<SortCategory>(defaultSortCategory)
-  const [taskToEdit, setTaskToEdit] = useState<Task>(blankFormData)
-  const [modalVisible, setModalVisible] = useState<boolean>(false)
+
+  const [modalState, setModalState] = useState<ModalState>({
+    taskToEdit: blankFormData,
+    modalVisible: false,
+  })
 
   function getTaskByID(taskID: TaskID): Task | null {
     const task = tasks.find((t) => t.id === taskID)
@@ -39,19 +46,24 @@ export default function Dashboard() {
   function handleTaskEdit(taskID: TaskID): void {
     const task = getTaskByID(taskID)
     if (task) {
-      setTaskToEdit(task)
-      setModalVisible(true)
+      setModalState({
+        taskToEdit: task,
+        modalVisible: true,
+      })
     }
   }
 
   function handleModalSave(newTask: Task): void {
     setTasks((prevTasks) =>
-      prevTasks.toSpliced(prevTasks.indexOf(taskToEdit), 1, newTask)
+      prevTasks.toSpliced(prevTasks.indexOf(modalState.taskToEdit), 1, newTask)
     )
   }
 
   function handleModalClose(): void {
-    setModalVisible(false)
+    setModalState((prevModalState) => ({
+      ...prevModalState,
+      modalVisible: false,
+    }))
   }
 
   function handleTaskDelete(taskID: TaskID): void {
@@ -118,8 +130,7 @@ export default function Dashboard() {
         />
       </div>
       <TaskEditModal
-        taskToEdit={taskToEdit}
-        modalVisible={modalVisible}
+        modalState={modalState}
         onModalClose={handleModalClose}
         onModalSave={handleModalSave}
       />

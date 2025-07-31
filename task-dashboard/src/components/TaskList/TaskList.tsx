@@ -1,6 +1,7 @@
 import TaskItem from "./TaskItem"
 import type { TaskListProps, SortFunc } from "../../types"
 import { SORT_CATEGORY_TO_SORT_FUNC } from "../../constants"
+import { saveTasksToLocalStorage } from "../../utils/taskUtils"
 
 export default function TaskList({
   tasks,
@@ -11,6 +12,8 @@ export default function TaskList({
 }: TaskListProps) {
   const sortFunc: SortFunc = SORT_CATEGORY_TO_SORT_FUNC[sortCategory]
   tasks.sort(sortFunc)
+
+  saveTasksToLocalStorage(tasks)
 
   const tasksToRender = tasks.map((task) => {
     return (

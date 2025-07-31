@@ -11,6 +11,7 @@ import type {
 export const defaultFilters: Filters = { status: "all", priority: "all" }
 export const defaultSortCategory: SortCategory = "status"
 
+
 export const blankFormData: Task = {
   id: "",
   title: "",
@@ -18,7 +19,13 @@ export const blankFormData: Task = {
   dueDate: "",
   status: "pending",
   priority: "low",
+} as const
+
+export const defaultModalState = {
+  taskToEdit: blankFormData,
+  modalVisible: false
 }
+
 
 export const TASK_STATUSES: TaskStatus[] = [
   "completed",

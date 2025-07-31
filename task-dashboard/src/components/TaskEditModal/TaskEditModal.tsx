@@ -1,15 +1,19 @@
-import { useState } from "react"
-import type { Task, TaskEditModalProps } from "../../types"
+import { useEffect, useState } from "react"
+import type { Task, TaskEditModalProps, ModalState } from "../../types"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
 
 export default function TaskEditModal({
-  taskToEdit,
-  modalVisible,
+  modalState,
   onModalClose,
   onModalSave,
 }: TaskEditModalProps) {
+  const {taskToEdit, modalVisible}: ModalState = modalState
   const [modalFormData, setModalFormData] = useState<Task>(taskToEdit)
+
+  useEffect(() => {
+    setModalFormData(taskToEdit)
+  }, [taskToEdit])
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -24,11 +28,14 @@ export default function TaskEditModal({
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault()
-    onModalSave(modalFormData)
-    onModalClose()
-  }
-
-  function handleCloseButtonClick(): void {
+    onModalSave({
+      id: modalFormData.id,
+      title: modalFormData.title,
+      description: modalFormData.description,
+      dueDate: modalFormData.dueDate,
+      status: modalFormData.status,
+      priority: modalFormData.priority
+    })
     onModalClose()
   }
 
@@ -101,7 +108,7 @@ export default function TaskEditModal({
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseButtonClick}>
+              <Button variant="secondary" onClick={() => onModalClose()}>
                 Close
               </Button>
               <Button type="submit" variant="primary">
