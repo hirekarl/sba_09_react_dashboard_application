@@ -1,6 +1,7 @@
 /*
 This is the component for the modal that allows task editing.
 Note that task status editing is done on the TaskItem itself.
+At present, input fields show as invalid on app start; fix as TODO.
 */
 
 import { useEffect, useState } from "react"

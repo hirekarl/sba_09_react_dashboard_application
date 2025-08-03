@@ -1,6 +1,7 @@
 /*
 This is the component that handles new task addition.
 Fields are valid if they are not an empty string.
+At present, input fields show as invalid on app start; fix as TODO.
 */
 
 import { useEffect, useState } from "react"
