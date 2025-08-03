@@ -1,5 +1,6 @@
 /*
 This is the component that renders each Task.
+Task status editing is handled here but not in the TaskEditModal.
 */
 
 import type { Task, TaskStatus, TaskItemProps } from "../../types"

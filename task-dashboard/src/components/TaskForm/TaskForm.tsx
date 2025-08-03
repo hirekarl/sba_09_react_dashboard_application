@@ -1,5 +1,6 @@
 /*
 This is the component that handles new task addition.
+Fields are valid if they are not an empty string.
 */
 
 import { useEffect, useState } from "react"

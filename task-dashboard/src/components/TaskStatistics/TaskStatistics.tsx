@@ -8,23 +8,19 @@ import { TASK_STATUSES, TASK_PRIORITIES } from "../../constants"
 export default function TaskStatistics({ tasks }: TaskStatisticsProps) {
   const totalTasksCount = tasks.length
 
+  // Counts the number of tasks per status.
   const [completedTasksCount, inProgressTasksCount, pendingTasksCount] =
     TASK_STATUSES.map((status) =>
-      tasks.reduce(
-        (acc, t) => (t.status === status ? (acc += 1) : acc),
-        0
-      )
+      tasks.reduce((acc, t) => (t.status === status ? (acc += 1) : acc), 0)
     )
 
+  // Counts the number of tasks per priority.
   const [
     highPriorityTasksCount,
     mediumPriorityTasksCount,
     lowPriorityTasksCount,
   ] = TASK_PRIORITIES.map((priority) =>
-    tasks.reduce(
-      (acc, t) => (t.priority === priority ? (acc += 1) : acc),
-      0
-    )
+    tasks.reduce((acc, t) => (t.priority === priority ? (acc += 1) : acc), 0)
   )
 
   return (

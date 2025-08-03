@@ -1,5 +1,6 @@
 /*
 This is the component that handles filtering and search.
+Note that in App, tasks are searched by both title and description.
 */
 
 import type {
