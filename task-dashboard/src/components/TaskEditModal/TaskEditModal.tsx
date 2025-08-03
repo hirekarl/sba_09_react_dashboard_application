@@ -28,14 +28,7 @@ export default function TaskEditModal({
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
     event.preventDefault()
-    onModalSave({
-      id: modalFormData.id,
-      title: modalFormData.title,
-      description: modalFormData.description,
-      dueDate: modalFormData.dueDate,
-      status: modalFormData.status,
-      priority: modalFormData.priority
-    })
+    onModalSave(modalFormData)
     onModalClose()
   }
 
@@ -108,7 +101,7 @@ export default function TaskEditModal({
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={() => onModalClose()}>
+              <Button variant="secondary" onClick={onModalClose}>
                 Close
               </Button>
               <Button type="submit" variant="primary">
