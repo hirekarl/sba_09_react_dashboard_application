@@ -70,3 +70,11 @@ export interface TaskEditModalProps {
   onModalClose: () => void
   onModalSave: (newTask: Task) => void
 }
+
+export interface FieldValidity {
+  title: boolean | null
+  description: boolean | null
+  dueDate: boolean | null
+  status: boolean | null
+  priority: boolean | null
+}

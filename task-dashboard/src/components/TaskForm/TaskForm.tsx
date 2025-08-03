@@ -1,14 +1,33 @@
-import { useState } from "react"
-import type { Task, TaskFormProps } from "../../types"
+import { useEffect, useState } from "react"
+import type { FieldValidity, Task, TaskFormProps } from "../../types"
 import { blankFormData } from "../../constants"
 
 export default function TaskForm({ onTaskAdd }: TaskFormProps) {
   const [formData, setFormData] = useState<Task>(blankFormData)
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(true)
+  const [fieldValidity, setFieldValidity] = useState<FieldValidity>({
+    title: null,
+    description: null,
+    dueDate: null,
+    status: true,
+    priority: true,
+  })
+
+  useEffect(() => {
+    if (Object.values(fieldValidity).every((v) => v === true)) {
+      setSubmitDisabled(false)
+    }
+  }, [fieldValidity])
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target
+
+    setFieldValidity((prevFieldValidity) => ({
+      ...prevFieldValidity,
+      [name]: fieldIsValid(value),
+    }))
 
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -17,11 +36,22 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
     }))
   }
 
+  function fieldIsValid(value: string): boolean {
+    return value !== ""
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     onTaskAdd(formData)
     setFormData(blankFormData)
+    setFieldValidity((prevFieldValidity) => ({
+      ...prevFieldValidity,
+      title: null,
+      description: null,
+      dueDate: null,
+    }))
+    setSubmitDisabled(true)
   }
 
   return (
@@ -40,9 +70,22 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
               name="title"
               id={`title-input-${formData.id}`}
               onChange={handleChange}
-              className="form-control"
+              className={`form-control ${
+                fieldValidity.title ? "is-valid" : "is-invalid"
+              }`}
               value={formData.title}
+              aria-describedby={
+                !fieldValidity.title ? `title-input-help-${formData.id}` : ""
+              }
+              required
             />
+            {!fieldValidity.title && (
+              <div
+                id={`title-input-help-${formData.id}`}
+                className="form-text text-danger">
+                You must enter a title.
+              </div>
+            )}
           </div>
         </div>
         <div className="mb-3 row">
@@ -57,9 +100,24 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
               name="description"
               id={`description-input-${formData.id}`}
               onChange={handleChange}
-              className="form-control"
+              className={`form-control ${
+                fieldValidity.description ? "is-valid" : "is-invalid"
+              }`}
               value={formData.description}
+              required
+              aria-describedby={
+                !fieldValidity.description
+                  ? `description-input-help-${formData.id}`
+                  : ""
+              }
             />
+            {!fieldValidity.description && (
+              <div
+                id={`description-input-help-${formData.id}`}
+                className="form-text text-danger">
+                You must enter a description.
+              </div>
+            )}
           </div>
         </div>
         <div className="mb-3 row">
@@ -73,10 +131,25 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
               type="date"
               name="dueDate"
               id={`due-date-input-${formData.id}`}
-              className="form-control"
+              className={`form-control ${
+                fieldValidity.dueDate ? "is-valid" : "is-invalid"
+              }`}
               onChange={handleChange}
               value={formData.dueDate}
+              required
+              aria-describedby={
+                !fieldValidity.dueDate
+                  ? `due-date-input-help-${formData.id}`
+                  : ""
+              }
             />
+            {!fieldValidity.dueDate && (
+              <div
+                id={`due-date-input-help-${formData.id}`}
+                className="form-text text-danger">
+                You must enter a due date.
+              </div>
+            )}
           </div>
         </div>
         <div className="d-flex justify-content-between gap-3 mb-3">
@@ -91,7 +164,8 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
               id={`status-select-${formData.id}`}
               className="form-select"
               onChange={handleChange}
-              value={formData.status}>
+              value={formData.status}
+              required>
               <option value="pending">Pending</option>
               <option value="in-progress">In Progress</option>
               <option value="completed">Completed</option>
@@ -108,7 +182,8 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
               id={`priority-select-${formData.id}`}
               className="form-select"
               onChange={handleChange}
-              value={formData.priority}>
+              value={formData.priority}
+              required>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -116,7 +191,10 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
           </div>
         </div>
         <div>
-          <button type="submit" className="btn btn-primary w-100">
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={submitDisabled}>
             Submit
           </button>
         </div>
