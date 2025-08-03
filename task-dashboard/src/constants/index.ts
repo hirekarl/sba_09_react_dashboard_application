@@ -6,6 +6,7 @@ import type {
   SortRank,
   SortFunc,
   Task,
+  BootstrapColors,
 } from "../types"
 
 export const defaultFilters: Filters = {
@@ -71,3 +72,12 @@ export const SORT_CATEGORY_TO_SORT_FUNC: Record<SortCategory, SortFunc> = {
   },
   "title": (a, b) => a.title.localeCompare(b.title),
 } as const
+
+export const PRIORITY_TO_BOOTSTRAP_COLOR: Record<
+  TaskPriority,
+  BootstrapColors
+> = {
+  high: "danger",
+  medium: "warning",
+  low: "info",
+}

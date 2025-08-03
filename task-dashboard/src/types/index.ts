@@ -85,3 +85,5 @@ export interface ModalFieldValidity {
   dueDate: boolean | null
   priority: boolean | null
 }
+
+export type BootstrapColors = "danger" | "warning" | "info"

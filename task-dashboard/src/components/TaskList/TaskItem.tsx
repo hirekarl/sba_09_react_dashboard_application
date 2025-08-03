@@ -1,5 +1,5 @@
 import type { Task, TaskStatus, TaskItemProps } from "../../types"
-import { TASK_STATUSES } from "../../constants"
+import { PRIORITY_TO_BOOTSTRAP_COLOR, TASK_STATUSES } from "../../constants"
 import { formatDate } from "../../utils/taskUtils"
 
 export default function TaskItem({
@@ -30,13 +30,14 @@ export default function TaskItem({
   return (
     <div className="card mb-3">
       <div className="card-body">
-        <div className="card-title">
+        <div className="card-title d-flex justify-content-between align-items-center">
           <h3 className="fs-5">{title}</h3>
+          <span
+            className={`badge text-bg-${PRIORITY_TO_BOOTSTRAP_COLOR[priority]}`}>
+            {priority.toUpperCase()}
+          </span>
         </div>
         <p className="card-text">{description}</p>
-        <p className="card-text">
-          <strong>Priority:</strong> {priority}
-        </p>
         <p className="card-text">
           <strong>Due:</strong> {formatDate(dueDate)}
         </p>
