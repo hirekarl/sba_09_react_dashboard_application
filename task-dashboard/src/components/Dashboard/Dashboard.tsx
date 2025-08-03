@@ -1,3 +1,7 @@
+/*
+This is the component for the Dashboard.
+*/
+
 import { useState } from "react"
 import {
   type Task,

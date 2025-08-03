@@ -1,3 +1,7 @@
+/*
+This is the component that renders each Task.
+*/
+
 import type { Task, TaskStatus, TaskItemProps } from "../../types"
 import { PRIORITY_TO_BOOTSTRAP_COLOR, TASK_STATUSES } from "../../constants"
 import { formatDate } from "../../utils/taskUtils"

@@ -1,3 +1,7 @@
+/*
+This is the component that handles Task statistics.
+*/
+
 import type { TaskStatisticsProps } from "../../types"
 import { TASK_STATUSES, TASK_PRIORITIES } from "../../constants"
 

@@ -1,3 +1,7 @@
+/*
+This is the component that handles new task addition.
+*/
+
 import { useEffect, useState } from "react"
 import type { FieldValidity, Task, TaskFormProps } from "../../types"
 import { blankFormData } from "../../constants"

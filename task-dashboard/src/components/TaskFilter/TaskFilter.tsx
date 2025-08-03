@@ -1,3 +1,7 @@
+/*
+This is the component that handles filtering and search.
+*/
+
 import type {
   TaskFilterProps,
   TaskPriorityFilter,

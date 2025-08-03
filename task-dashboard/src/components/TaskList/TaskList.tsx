@@ -1,3 +1,7 @@
+/*
+This is the component that renders the list of tasks.
+*/
+
 import TaskItem from "./TaskItem"
 import type { TaskListProps, SortFunc } from "../../types"
 import { SORT_CATEGORY_TO_SORT_FUNC } from "../../constants"

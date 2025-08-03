@@ -1,3 +1,8 @@
+/*
+This is the component for the modal that allows task editing.
+Note that task status editing is done on the TaskItem itself.
+*/
+
 import { useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { Button } from "react-bootstrap"
