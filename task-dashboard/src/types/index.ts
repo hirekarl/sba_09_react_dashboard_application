@@ -78,3 +78,10 @@ export interface FieldValidity {
   status: boolean | null
   priority: boolean | null
 }
+
+export interface ModalFieldValidity {
+  title: boolean | null
+  description: boolean | null
+  dueDate: boolean | null
+  priority: boolean | null
+}
