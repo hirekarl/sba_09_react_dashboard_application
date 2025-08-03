@@ -1,5 +1,6 @@
 import type { Task, TaskStatus, TaskItemProps } from "../../types"
 import { TASK_STATUSES } from "../../constants"
+import { formatDate } from "../../utils/taskUtils"
 
 export default function TaskItem({
   task,
@@ -8,11 +9,6 @@ export default function TaskItem({
   onDelete,
 }: TaskItemProps) {
   const { id, title, description, dueDate, status, priority }: Task = task
-
-  function formatDate(): string {
-    const [year, month, day] = dueDate.split("-").map((part) => parseInt(part))
-    return `${month}/${day}/${year}`
-  }
 
   function handleEditButtonClick(): void {
     onEdit(id)
@@ -42,7 +38,7 @@ export default function TaskItem({
           <strong>Priority:</strong> {priority}
         </p>
         <p className="card-text">
-          <strong>Due:</strong> {formatDate()}
+          <strong>Due:</strong> {formatDate(dueDate)}
         </p>
       </div>
       <div className="card-footer">

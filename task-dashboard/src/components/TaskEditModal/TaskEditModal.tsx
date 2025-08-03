@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
+import { Modal } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import type {
   Task,
   TaskEditModalProps,
   ModalState,
   ModalFieldValidity,
 } from "../../types"
-import { Modal } from "react-bootstrap"
-import { Button } from "react-bootstrap"
+import { fieldIsValid } from "../../utils/taskUtils"
 
 export default function TaskEditModal({
   modalState,
@@ -47,10 +48,6 @@ export default function TaskEditModal({
       ...prevModalFormData,
       [name]: value,
     }))
-  }
-
-  function fieldIsValid(value: string): boolean {
-    return value !== ""
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {

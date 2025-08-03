@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { FieldValidity, Task, TaskFormProps } from "../../types"
 import { blankFormData } from "../../constants"
+import { fieldIsValid } from "../../utils/taskUtils"
 
 export default function TaskForm({ onTaskAdd }: TaskFormProps) {
   const [formData, setFormData] = useState<Task>(blankFormData)
@@ -34,10 +35,6 @@ export default function TaskForm({ onTaskAdd }: TaskFormProps) {
       id: window.crypto.randomUUID(),
       [name]: value,
     }))
-  }
-
-  function fieldIsValid(value: string): boolean {
-    return value !== ""
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
