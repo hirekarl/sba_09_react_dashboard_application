@@ -53,6 +53,7 @@ export interface TaskFilterProps {
   sortCategory: SortCategory
   onFilterChange: (newFilter: Filter) => void
   onSortCategoryChange: (newSortCategory: SortCategory) => void
+  onSearchInputChange: (searchTerm: string) => void
 }
 
 export interface TaskStatisticsProps {

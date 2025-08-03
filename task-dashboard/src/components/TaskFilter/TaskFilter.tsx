@@ -2,7 +2,7 @@ import type {
   TaskFilterProps,
   TaskPriorityFilter,
   TaskStatusFilter,
-  SortCategory
+  SortCategory,
 } from "../../types"
 
 export default function TaskFilter({
@@ -10,6 +10,7 @@ export default function TaskFilter({
   sortCategory,
   onFilterChange,
   onSortCategoryChange,
+  onSearchInputChange,
 }: TaskFilterProps) {
   const { status, priority } = filters
 
@@ -29,6 +30,10 @@ export default function TaskFilter({
     event: React.ChangeEvent<HTMLSelectElement>
   ): void {
     onSortCategoryChange(event.target.value as SortCategory)
+  }
+
+  function handleSearchInput(event: React.ChangeEvent<HTMLInputElement>): void {
+    onSearchInputChange(event.target.value.toLowerCase())
   }
 
   return (
@@ -81,6 +86,23 @@ export default function TaskFilter({
             <option value="title">Title</option>
           </select>
         </div>
+      </div>
+      <div className="mb-3">
+        <div className="input-group">
+          <label htmlFor="search-input" className="input-group-text">
+            <i className="bi bi-search"></i>
+          </label>
+          <input
+            type="search"
+            id="search-input"
+            className="form-control"
+            onChange={handleSearchInput}
+            aria-describedby="search-input-help"
+          />
+        </div>
+        <p id="search-input-help" className="form-text">
+          Search for text in task title or description.
+        </p>
       </div>
     </>
   )

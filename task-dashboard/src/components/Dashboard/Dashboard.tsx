@@ -34,6 +34,8 @@ export default function Dashboard() {
     modalVisible: false,
   })
 
+  const [searchTerm, setSearchTerm] = useState<string>("")
+
   function getTaskByID(taskID: TaskID): Task | null {
     const task = tasks.find((t) => t.id === taskID)
     return task ? task : null
@@ -103,6 +105,20 @@ export default function Dashboard() {
     setSortCategory(newSortCategory)
   }
 
+  function handleSearchInputChange(newSearchTerm: string): void {
+    setSearchTerm(newSearchTerm)
+  }
+
+  function filterTasks(): Task[] {
+    return tasks.filter(
+      (t) =>
+        (filters.status === "all" || t.status === filters.status) &&
+        (filters.priority === "all" || t.priority === filters.priority) &&
+        (t.title.toLowerCase().includes(searchTerm) ||
+          t.description.toLowerCase().includes(searchTerm))
+    )
+  }
+
   return (
     <>
       <div className="col-lg-6 offset-lg-0 col-md-10 offset-md-1 col-sm-12">
@@ -115,14 +131,11 @@ export default function Dashboard() {
           sortCategory={sortCategory}
           onFilterChange={handleFilterChange}
           onSortCategoryChange={handleSortCategoryChange}
+          onSearchInputChange={handleSearchInputChange}
         />
         <hr />
         <TaskList
-          tasks={tasks.filter(
-            (t) =>
-              (filters.status === "all" || t.status === filters.status) &&
-              (filters.priority === "all" || t.priority === filters.priority)
-          )}
+          tasks={filterTasks()}
           sortCategory={sortCategory}
           onTaskStatusChange={handleTaskStatusChange}
           onTaskEdit={handleTaskEdit}
