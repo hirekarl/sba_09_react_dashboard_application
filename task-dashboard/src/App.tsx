@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-bs-theme", colorTheme)
-  })
+  }, [colorTheme])
 
   function toggleTheme(): void {
     if (colorTheme === "dark") setColorTheme("light")

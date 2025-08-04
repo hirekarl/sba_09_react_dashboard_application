@@ -2,7 +2,7 @@
 This is the component for the Dashboard.
 */
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   type Task,
   type TaskID,
@@ -24,6 +24,7 @@ import {
 } from "../../constants"
 import { mockTasks } from "../../data/mockTasks"
 import { getTasksFromLocalStorage } from "../../utils/taskUtils"
+import ImportExport from "../ImportExport/ImportExport"
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(
@@ -38,11 +39,28 @@ export default function Dashboard() {
     modalVisible: false,
   })
 
+  const [blobURL, setBlobURL] = useState<string>("")
+
   const [searchTerm, setSearchTerm] = useState<string>("")
 
   function getTaskByID(taskID: TaskID): Task | null {
     const task = tasks.find((t) => t.id === taskID)
     return task ? task : null
+  }
+
+  useEffect(() => {
+    setBlobURL(
+      URL.createObjectURL(
+        new Blob([JSON.stringify(tasks, null, 2)], {
+          type: "application/json",
+        })
+      )
+    )
+  }, [tasks])
+
+  // Not implemented
+  function handleImport(): Task[] | null {
+    return null
   }
 
   function handleTaskAdd(newTask: Task) {
@@ -126,6 +144,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="col-lg-6 offset-lg-0 col-md-10 offset-md-1 col-sm-12">
+        <ImportExport onImport={handleImport} exportURL={blobURL} />
         <TaskForm onTaskAdd={handleTaskAdd} />
         <TaskStatistics tasks={tasks} />
       </div>

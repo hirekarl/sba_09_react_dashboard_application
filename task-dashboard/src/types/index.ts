@@ -89,3 +89,8 @@ export interface ModalFieldValidity {
 export type BootstrapColors = "danger" | "warning" | "info"
 
 export type BootstrapTheme = "light" | "dark"
+
+export interface ImportExportProps {
+  onImport: () => Task[] | null
+  exportURL: string
+}
