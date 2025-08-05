@@ -30,6 +30,8 @@ Write a reflection addressing:
 > The main challenge was form validation, only because it was very tedious and I had to implement everything twice, since I used a separate form component for the modal. I overcame them by pushing through. With more time, I'd try to figure out how to render the forms without registering initially as invalid. I started trying to work with transition animations and ultimately gave up on it for this submission; I need to learn more about `useRef` and the React rendering pipeline to be able to use [React Transition Group](https://reactcommunity.org/react-transition-group/) and its utilities properly. I also decided not to implement task reordering, since it would involve completely restructuring how I was doing filtering and sorting.
 >
 > I decided to handle tasks, filters, sort categories, and modal state on the root `Dashboard` component and passed down callbacks to lift state changes from child components. I implemented task search as a part of the `TaskFilter` component, and handled all the task filtering (matching against applied filters and the search term lifted from the search input) with the `filterTasks` method on `Dashboard`.
+>
+> Note that task export as JSON is implemented; with more time, I'd like to build out the implementation to be able to import tasks as JSON.
 
 ## Assignment
 In this assessment, you will apply the skills you have developed throughout your React training to build a functional, real-world dashboard application. This project will test your understanding of React components, state management, TypeScript integration, form handling, and component composition.
