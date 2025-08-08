@@ -136,8 +136,8 @@ export default function Dashboard() {
       (t) =>
         (filters.status === "all" || t.status === filters.status) &&
         (filters.priority === "all" || t.priority === filters.priority) &&
-        (t.title.toLowerCase().includes(searchTerm) ||
-          t.description.toLowerCase().includes(searchTerm))
+        (t.title?.toLowerCase().includes(searchTerm) ||
+          t.description?.toLowerCase().includes(searchTerm))
     )
   }
 
