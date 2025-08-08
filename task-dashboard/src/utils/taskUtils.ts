@@ -2,7 +2,7 @@ import type { Task } from "../types"
 
 // Utility function for getting tasks from localStorage
 export function getTasksFromLocalStorage(): Task[] | null {
-  const tasksJSON = localStorage.getItem("tasks")
+  const tasksJSON = localStorage.getItem("karlTasks")
 
   if (tasksJSON) {
     return JSON.parse(tasksJSON)
@@ -14,7 +14,7 @@ export function getTasksFromLocalStorage(): Task[] | null {
 // Utility function for saving tasks to localStorage
 export function saveTasksToLocalStorage(tasks: Task[]): void {
   try {
-    localStorage.setItem("tasks", JSON.stringify(tasks))
+    localStorage.setItem("karlTasks", JSON.stringify(tasks))
   } catch (error) {
     console.error(error)
   }
