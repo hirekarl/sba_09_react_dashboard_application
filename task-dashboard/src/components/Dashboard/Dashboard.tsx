@@ -27,8 +27,9 @@ import { getTasksFromLocalStorage } from "../../utils/taskUtils"
 import ImportExport from "../ImportExport/ImportExport"
 
 export default function Dashboard() {
+  const localStorageTasks = getTasksFromLocalStorage()
   const [tasks, setTasks] = useState<Task[]>(
-    getTasksFromLocalStorage() || mockTasks
+    localStorageTasks || mockTasks
   )
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [sortCategory, setSortCategory] =
