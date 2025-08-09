@@ -26,11 +26,10 @@ import { mockTasks } from "../../data/mockTasks"
 import { getTasksFromLocalStorage } from "../../utils/taskUtils"
 import ImportExport from "../ImportExport/ImportExport"
 
+const localStorageTasks = getTasksFromLocalStorage()
+
 export default function Dashboard() {
-  const localStorageTasks = getTasksFromLocalStorage()
-  const [tasks, setTasks] = useState<Task[]>(
-    localStorageTasks || mockTasks
-  )
+  const [tasks, setTasks] = useState<Task[]>(localStorageTasks || mockTasks)
   const [filters, setFilters] = useState<Filters>(defaultFilters)
   const [sortCategory, setSortCategory] =
     useState<SortCategory>(defaultSortCategory)
